@@ -1,5 +1,6 @@
-#include<stdio.h>
-#include<math.h>
+#include <stdio.h>
+#include <math.h>
+#include <assert.h>
 
 double to_radian(double degrees) {
     return degrees * M_PI / 180.0;
@@ -15,22 +16,23 @@ void print_solved(double al, double bl, double cl, double Aa, double Ba, double 
     printf("angle b %lf side b: %lf\n", Ba,bl);
     printf("angle c %lf side c: %lf\n", Ca,cl);
 }
-double law_of_sine_angle(double al,double aa,double bl){
+double law_of_sine_angle(double al,double aa,double bl) {
+// calculate the angle using the law of sine return in radians
 // al is length of side a
-// aa is the angle oppisite of side a 
+// aa is the angle oppisite of side a
 // bl is the the length of side b
     double ar = to_radian(aa);
     double sr = sin(ar)/aa;
     return asin(sr*bl);
 }
-double law_of_sine_side(double al,double aa,double ba){
+double law_of_sine_side(double al,double aa,double ba) {
 // al is length of side a
-// aa is the angle oppisite of side a 
+// aa is the angle oppisite of side a
 // ba is the the angle of side b
     double ar = to_radian(aa);
     double br = to_radian(ba);
     return (al*sin(br))/sin(ar);
-}   
+}
 
 double law_of_cosine_side(double al, double bl, double angle) {
 // al is length of side a
@@ -49,14 +51,14 @@ double law_of_cosine_angle(double al, double bl, double cl) {
     return acos(cc);// the angle in radians
 }
 
-void solve_sss(double al,double bl, double cl){
+void solve_sss(double al,double bl, double cl) {
     double aa = law_of_cosine_angle(al,bl,cl);
     double ba = law_of_sine_angle(al,aa,bl);
     double ca = law_of_sine_angle(al,aa,al);
     print_solved(al,bl,cl,to_degree(aa),to_degree(ba),to_degree(ca));
 }
 
-void solve_ssa(double al,double bl, double ca){
+void solve_ssa(double al,double bl, double ca) {
     //solve side side angle
     double cl = law_of_cosine_side(al,bl,ca);
     double aa = law_of_sine_angle(cl,ca,al);
@@ -64,7 +66,7 @@ void solve_ssa(double al,double bl, double ca){
     print_solved(al,bl,cl,to_degree(aa),to_degree(ba),ca);
 }
 
-void solve_sas(double al,double aa,double bl){
+void solve_sas(double al,double aa,double bl) {
     double ba = law_of_sine_angle(al,aa,bl);
     double bda = to_degree(ba);
     double ca = 180 -(bda+aa); // ca in degrees
@@ -118,26 +120,62 @@ int main(int argc,char** argv) {
     }
 
     printf("all data entered\n");
-    if(angles+sides<3){
+    if(angles+sides<3) {
         printf("not enough data to solve the triangle\n");
         printf("you need at least 3 values to solve the triangle\n");
     }
-    if(sides<1){
+    if(sides<1) {
         printf("you need at least 1 side to solve the triangle\n");
     }
-    if(angles==3 && sides==3){
+    if(angles==3 && sides==3) {
         printf("the triangle is fully solved\n");
         print_solved(al, bl, cl, Aa, Ba, Ca);
-    }
-
-    if(sides == 3 && angles == 0){
-        solve_ssa(al,bl,cl);
-    }
-    if(sides>=2 && angles >=1){
-        printf("figure out if its a ssa triangle or a sas")
         return 0;
     }
-    if(sides>=1 && angles >=2){
+
+    if(sides == 3 && angles == 0) {
+        solve_sss(al,bl,cl);
+        return 0;
+    }
+    if(sides>=2 && angles >=1) {
+        printf("figure out if its a ssa triangle or a sas triangle \n ");
+        if(al>0 && Aa >0){
+            printf("Aa is a side angle pair\n");
+            return 0;
+        }
+        if(bl>0 && Ba >0){
+            printf("Ba is the side angle pair\n");
+            return 0;
+        }
+        if(cl>0 &&  Ca >0){
+            printf("Ca us the side angle pair\n");
+            return 0;
+        }
+        printf("it's a ssa triangle\n");
+        int side_count = 0;
+        double sides[2];
+        double angle = 0.0;
+        if(al > 0){
+            sides[side_count]  = al;
+            side_count++;
+        }
+        if( bl > 0){
+            sides[side_count] = bl;
+            side_count++;
+        }
+        assert(side_count>0);
+        if( cl > 0){
+            sides[1] = cl;
+        }
+        if(Aa > 0 ){ angle = Aa;}
+        if(Ba > 0 ){ angle = Ba;}
+        if(Ca > 0 ){ angle = Ca;}
+        solve_ssa(sides[0],sides[1],angle);
+        return 0;
+
+
+    }
+    if(sides>=1 && angles >=2) {
         printf("solve a aas triangle");
     }
 
