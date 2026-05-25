@@ -1,6 +1,9 @@
+
+#define _USE_MATH_DEFINES
 #include <stdio.h>
 #include <math.h>
 #include <assert.h>
+
 
 double to_radian(double degrees) {
     return degrees * M_PI / 180.0;
@@ -73,6 +76,10 @@ void solve_sas(double al,double aa,double bl) {
     double cl = law_of_sine_side(al,aa,ca);
     print_solved(al,bl,cl,to_degree(aa),to_degree(ba),ca);
 }
+
+void solve_aas_nopair(double Aa, double Ba, double Ca, double side_length) {
+
+}
 int main(int argc,char** argv) {
 
 //declare variables for the triangle
@@ -87,6 +94,7 @@ int main(int argc,char** argv) {
 // get the values from the user
     int angles = 0;
     int sides = 0;
+
     printf("enter values for the triangle use zero if you don't know the value\n");
     printf("enter length of side a: ");
     scanf("%lf",&al);
@@ -139,37 +147,45 @@ int main(int argc,char** argv) {
     }
     if(sides>=2 && angles >=1) {
         printf("figure out if its a ssa triangle or a sas triangle \n ");
-        if(al>0 && Aa >0){
+        if(al>0 && Aa >0) {
             printf("Aa is a side angle pair\n");
             return 0;
         }
-        if(bl>0 && Ba >0){
+        if(bl>0 && Ba >0) {
             printf("Ba is the side angle pair\n");
             return 0;
         }
-        if(cl>0 &&  Ca >0){
+        if(cl>0 &&  Ca >0) {
             printf("Ca us the side angle pair\n");
             return 0;
         }
         printf("it's a ssa triangle\n");
         int side_count = 0;
-        double sides[2];
+        double sides[2] = { 0,0 };
         double angle = 0.0;
-        if(al > 0){
+        if(al > 0) {
             sides[side_count]  = al;
             side_count++;
         }
-        if( bl > 0){
+        if( bl > 0) {
             sides[side_count] = bl;
             side_count++;
         }
         assert(side_count>0);
-        if( cl > 0){
+        // count cl if bl or al haven't been counted
+        if( cl > 0 && side_count<2) {
             sides[1] = cl;
         }
-        if(Aa > 0 ){ angle = Aa;}
-        if(Ba > 0 ){ angle = Ba;}
-        if(Ca > 0 ){ angle = Ca;}
+        if(Aa > 0 ) {
+            angle = Aa;
+        }
+        if(Ba > 0 ) {
+            angle = Ba;
+        }
+        if(Ca > 0 ) {
+            angle = Ca;
+        }
+        assert(angle != 0.0);
         solve_ssa(sides[0],sides[1],angle);
         return 0;
 
@@ -177,6 +193,50 @@ int main(int argc,char** argv) {
     }
     if(sides>=1 && angles >=2) {
         printf("solve a aas triangle");
+        int angle_count = 0;
+        double angles[2] = {0 , 0};
+        double side_length = 0.0;
+        if(Aa != 0.0) {
+            angles[angle_count] = Aa;
+            angle_count++;
+        }
+
+        if(Ba != 0.0) {
+            angles[angle_count] = Ba;
+            angle_count++;
+        }
+        if(angle_count<2 && Ca != 0.0) {
+            angles[1] = Ca;
+        }
+
+        //TODO: create function to solve aas triangle
+        // Find angle side pair if they exists
+
+        if (Aa != 0.0 && al != 0.0) {
+            printf("Aa is angle pair");
+            //TODO solve aas
+            return 0;
+        }
+        if (Ba != 0.0 && bl != 0.0) {
+            printf("Ba is angle pair");
+            //TODO solve for Ba aas
+            return 0;
+        }
+        if (Ca != 0.0 && cl != 0.0) {
+            printf("Ba is angle pair");
+            //TODO solve for Ca aas
+            return 0;
+        }
+        if (al != 0.0) {
+            solve_aas_nopair(Aa, Ba, Ca, al);
+        }
+        if (bl != 0.0) {
+            solve_aas_nopair(Aa, Ba, Ca, bl);
+        }
+        if (cl != 0.0) {
+            solve_aas_nopair(Aa, Ba, Ca, cl);
+        }
+        return 0;
     }
 
     return  0;
