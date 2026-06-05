@@ -1,6 +1,6 @@
 
 #define _USE_MATH_DEFINES
-#include <stdio.h>
+#include <stdio.>
 #include <math.h>
 #include <assert.h>
 
@@ -25,7 +25,8 @@ double law_of_sine_angle(double al,double aa,double bl) {
 // aa is the angle oppisite of side a
 // bl is the the length of side b
     double ar = to_radian(aa);
-    double sr = sin(ar)/aa;
+    printf("aa as radians %lf",ar);
+    double sr = sin(ar)/al;
     return asin(sr*bl);
 }
 double law_of_sine_side(double al,double aa,double ba) {
@@ -74,7 +75,7 @@ void solve_sas(double al,double aa,double bl) {
     double bda = to_degree(ba); // law of sine returns in radians
     double ca = 180 -(bda+aa); // ca in degrees
     double cl = law_of_sine_side(al,aa,ca);
-    print_solved(al,bl,cl,to_degree(aa),to_degree(ba),ca);
+    print_solved(al,bl,cl,aa,ba,ca);
 }
 
 void solve_aas_nopair(double Aa, double Ba, double Ca, double side_length) {
@@ -161,6 +162,7 @@ int main(int argc,char** argv) {
             printf("Aa is a side angle pair\n");
             if(bl != 0) {
                 solve_sas(al,Aa,bl);
+                printf("line: %i \n",__LINE__);
             }
             else {
                 solve_sas(al,Aa,cl);
@@ -242,7 +244,6 @@ int main(int argc,char** argv) {
 
         if (Aa != 0.0 && al != 0.0) {
             printf("Aa is angle pair");
-	    printf("debug  solve_aas_pair");
             if(Ba != 0.0){
                 solve_aas_pair(Aa, Ba, al);
                 return 0;
@@ -250,17 +251,28 @@ int main(int argc,char** argv) {
             if(Ca != 0.0){
                 solve_aas_pair(Aa, Ca, al);
             }
-            //TODO solve aas
             return 0;
         }
         if (Ba != 0.0 && bl != 0.0) {
             printf("Ba is angle pair");
-            //TODO solve for Ba aas
+           if( Aa != 0.0){
+               solve_aas_pair(Ba, Aa, bl);
+               return 0;
+           }
+           if(Ca != 0.0){
+               solve_aas_pair(Ba, Ca, bl);
+           }
             return 0;
         }
         if (Ca != 0.0 && cl != 0.0) {
-            printf("Ba is angle pair");
-            //TODO solve for Ca aas
+            printf("Ca is angle pair");
+            if(Aa != 0.0){
+                solve_aas_pair(Ca, Aa, cl);
+                return 0;;
+            }
+            if(Ba != 0.0){
+                solve_aas_pair(Ca, Ba, cl);
+            }
             return 0;
         }
         if (al != 0.0) {
