@@ -79,6 +79,30 @@ void solve_sas(double al,double aa,double bl) {
 }
 
 void solve_aas_nopair(double Aa, double Ba, double Ca, double side_length) {
+    if(Aa == 0.0){
+        //assume side_length is a because there is no pair
+        double taa = 180.0-(Ba+Ca);
+        double bl = law_of_sine_side(side_length, taa, Ba);
+        double cl = law_of_sine_side(side_length, taa, Ca);
+        print_solved(side_length, bl, cl, taa, Ba, Ca);
+        return;
+    }
+    if(Ba == 0.0){
+        //assume side_length is b because there is no pair
+        double tba = 180.0-(Aa+Ca);
+        double al = law_of_sine_side(side_length, tba, Aa);
+        double cl = law_of_sine_side(side_length, tba, Ca);
+        print_solved(al, side_length, cl, Aa, tba, Ca);
+        return;
+    }
+    if(Ca == 0.0){
+        //assume side_length is c because there is no pair
+        double tca = 180.0-(Aa+Ba);
+        double al = law_of_sine_side(side_length, tca, Aa);
+        double bl = law_of_sine_side(side_length, tca, Ba);
+        print_solved(al, bl, side_length, Aa, Ba, tca);
+        return;
+    }
 
 }
 
@@ -223,21 +247,7 @@ int main(int argc,char** argv) {
     }
     if(sides>=1 && angles >=2) {
         printf("solve a aas triangle");
-        int angle_count = 0;
-        double angles[2] = {0, 0};
         double side_length = 0.0;
-        if(Aa != 0.0) {
-            angles[angle_count] = Aa;
-            angle_count++;
-        }
-
-        if(Ba != 0.0) {
-            angles[angle_count] = Ba;
-            angle_count++;
-        }
-        if(angle_count<2 && Ca != 0.0) {
-            angles[1] = Ca;
-        }
 
         //TODO: create function to solve aas triangle
         // Find angle side pair if they exists
