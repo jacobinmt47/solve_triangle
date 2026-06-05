@@ -80,6 +80,15 @@ void solve_sas(double al,double aa,double bl) {
 void solve_aas_nopair(double Aa, double Ba, double Ca, double side_length) {
 
 }
+
+void solve_aas_pair(double a,double b,double side_a){
+    // a and b must be in degress not radians
+    //both a and b must be between 0 and 180 degress
+    double c = 180 - (a+b);
+    double side_b = law_of_sine_side(side_a,a,b);
+    double side_c = law_of_sine_side(side_a,a,c);
+    print_solved(side_a, side_b, side_c, a, b, c);
+}
 int main(int argc,char** argv) {
 
 //declare variables for the triangle
@@ -233,6 +242,13 @@ int main(int argc,char** argv) {
 
         if (Aa != 0.0 && al != 0.0) {
             printf("Aa is angle pair");
+            if(Ba != 0.0){
+                solve_aas_pair(Aa, Ba, al);
+                return 0;
+            }
+            if(Ca != 0.0){
+                solve_aas_pair(Aa, Ca, al);
+            }
             //TODO solve aas
             return 0;
         }
