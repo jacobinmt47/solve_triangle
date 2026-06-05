@@ -247,8 +247,6 @@ int main(int argc,char** argv) {
     }
     if(sides>=1 && angles >=2) {
         printf("solve a aas triangle");
-        double side_length = 0.0;
-
         //TODO: create function to solve aas triangle
         // Find angle side pair if they exists
 
