@@ -1,6 +1,6 @@
 
 #define _USE_MATH_DEFINES
-#include <stdio.>
+#include <stdio.h>
 #include <math.h>
 #include <assert.h>
 
@@ -75,14 +75,14 @@ void solve_sas(double al,double aa,double bl) {
     double bda = to_degree(ba); // law of sine returns in radians
     double ca = 180 -(bda+aa); // ca in degrees
     double cl = law_of_sine_side(al,aa,ca);
-    print_solved(al,bl,cl,aa,ba,ca);
+    print_solved(al,bl,cl,aa,bda,ca);
 }
 
 void solve_aas_nopair(double Aa, double Ba, double Ca, double side_length) {
 
 }
 
-void solve_aas_pair(double a,double b,double side_a){
+void solve_aas_pair(double a,double b,double side_a) {
     // a and b must be in degress not radians
     //both a and b must be between 0 and 180 degress
     double c = 180 - (a+b);
@@ -244,33 +244,33 @@ int main(int argc,char** argv) {
 
         if (Aa != 0.0 && al != 0.0) {
             printf("Aa is angle pair");
-            if(Ba != 0.0){
+            if(Ba != 0.0) {
                 solve_aas_pair(Aa, Ba, al);
                 return 0;
             }
-            if(Ca != 0.0){
+            if(Ca != 0.0) {
                 solve_aas_pair(Aa, Ca, al);
             }
             return 0;
         }
         if (Ba != 0.0 && bl != 0.0) {
             printf("Ba is angle pair");
-           if( Aa != 0.0){
-               solve_aas_pair(Ba, Aa, bl);
-               return 0;
-           }
-           if(Ca != 0.0){
-               solve_aas_pair(Ba, Ca, bl);
-           }
+            if( Aa != 0.0) {
+                solve_aas_pair(Ba, Aa, bl);
+                return 0;
+            }
+            if(Ca != 0.0) {
+                solve_aas_pair(Ba, Ca, bl);
+            }
             return 0;
         }
         if (Ca != 0.0 && cl != 0.0) {
             printf("Ca is angle pair");
-            if(Aa != 0.0){
+            if(Aa != 0.0) {
                 solve_aas_pair(Ca, Aa, cl);
                 return 0;;
             }
-            if(Ba != 0.0){
+            if(Ba != 0.0) {
                 solve_aas_pair(Ca, Ba, cl);
             }
             return 0;
