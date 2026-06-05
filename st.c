@@ -242,6 +242,7 @@ int main(int argc,char** argv) {
 
         if (Aa != 0.0 && al != 0.0) {
             printf("Aa is angle pair");
+	    printf("debug  solve_aas_pair");
             if(Ba != 0.0){
                 solve_aas_pair(Aa, Ba, al);
                 return 0;
