@@ -79,7 +79,7 @@ void solve_sas(double al,double aa,double bl) {
 }
 
 void solve_aas_nopair(double Aa, double Ba, double Ca, double side_length) {
-    if(Aa == 0.0){
+    if(Aa == 0.0) {
         //assume side_length is a because there is no pair
         double taa = 180.0-(Ba+Ca);
         double bl = law_of_sine_side(side_length, taa, Ba);
@@ -87,7 +87,7 @@ void solve_aas_nopair(double Aa, double Ba, double Ca, double side_length) {
         print_solved(side_length, bl, cl, taa, Ba, Ca);
         return;
     }
-    if(Ba == 0.0){
+    if(Ba == 0.0) {
         //assume side_length is b because there is no pair
         double tba = 180.0-(Aa+Ca);
         double al = law_of_sine_side(side_length, tba, Aa);
@@ -95,7 +95,7 @@ void solve_aas_nopair(double Aa, double Ba, double Ca, double side_length) {
         print_solved(al, side_length, cl, Aa, tba, Ca);
         return;
     }
-    if(Ca == 0.0){
+    if(Ca == 0.0) {
         //assume side_length is c because there is no pair
         double tca = 180.0-(Aa+Ba);
         double al = law_of_sine_side(side_length, tca, Aa);
@@ -115,7 +115,7 @@ void solve_aas_pair(double a,double b,double side_a) {
     print_solved(side_a, side_b, side_c, a, b, c);
 }
 
-void work_on_aas(double al,double Aa,double bl, double Ba, double cl,double Ca, int sides, int angles){
+void work_on_aas(double al,double Aa,double bl, double Ba, double cl,double Ca, int sides, int angles) {
     if(sides>=1 && angles >=2) {
         printf("solve a aas triangle");
         //TODO: create function to solve aas triangle
@@ -214,6 +214,8 @@ int main(int argc,char** argv) {
     }
 
     printf("all data entered\n");
+    //print as a debug the number of sides and angles
+    printf("sides: %i angles: %i \n", sides, angles);
     if(angles+sides<3) {
         printf("not enough data to solve the triangle\n");
         printf("you need at least 3 values to solve the triangle\n");
@@ -222,7 +224,7 @@ int main(int argc,char** argv) {
         printf("you need at least 1 side to solve the triangle\n");
     }
     if(angles==3 && sides==3) {
-        printf("the triangle is fully solved\n");
+        printf("all sides entered! \n");
         print_solved(al, bl, cl, Aa, Ba, Ca);
         return 0;
     }
@@ -232,8 +234,11 @@ int main(int argc,char** argv) {
         solve_sss(al,bl,cl);
         return 0;
     }
+    // for debug
+    printf(" al: %lf  Aa: %lf \n",al,Aa);
     if(sides>=2 && angles >=1) {
         printf("figure out if its a ssa triangle or a sas triangle \n ");
+
         if(al>0 && Aa >0) {
             printf("Aa is a side angle pair\n");
             if(bl != 0) {
@@ -243,7 +248,7 @@ int main(int argc,char** argv) {
             else {
                 solve_sas(al,Aa,cl);
             }
-            return 0;
+            return 0; // exit so as to not call bl && Ba
         }
         if(bl>0 && Ba >0) {
             printf("Ba is the side angle pair\n");
@@ -267,20 +272,20 @@ int main(int argc,char** argv) {
         }
         printf("it's a ssa triangle\n");
         int side_count = 0;
-        double sides[2] = { 0,0 };
+        double tsides[2] = { 0,0 };
         double angle = 0.0;
         if(al > 0) {
-            sides[side_count]  = al;
+            tsides[side_count]  = al;
             side_count++;
         }
         if( bl > 0) {
-            sides[side_count] = bl;
+            tsides[side_count] = bl;
             side_count++;
         }
         assert(side_count>0);
         // count cl if bl or al haven't been counted
         if( cl > 0 && side_count<2) {
-            sides[1] = cl;
+            tsides[1] = cl;
         }
         if(Aa > 0 ) {
             angle = Aa;
@@ -292,13 +297,11 @@ int main(int argc,char** argv) {
             angle = Ca;
         }
         assert(angle != 0.0);
-        solve_ssa(sides[0],sides[1],angle);
-        //return 0;
-        work_on_aas(al, Aa, bl, Ba, cl, Ca, side_count, angles)
-
+        solve_ssa(tsides[0],tsides[1],angle);
+        return 0;
 
     }
-
-
+    printf("call work on aas \n");
+    work_on_aas(al, Aa, bl, Ba, cl, Ca, sides, angles);
     return  0;
 }
