@@ -114,6 +114,58 @@ void solve_aas_pair(double a,double b,double side_a) {
     double side_c = law_of_sine_side(side_a,a,c);
     print_solved(side_a, side_b, side_c, a, b, c);
 }
+
+void work_on_aas(double al,double Aa,double bl, double Ba, double cl,double Ca, int sides, int angles){
+    if(sides>=1 && angles >=2) {
+        printf("solve a aas triangle");
+        //TODO: create function to solve aas triangle
+        // Find angle side pair if they exists
+
+        if (Aa != 0.0 && al != 0.0) {
+            printf("Aa is angle pair");
+            if(Ba != 0.0) {
+                solve_aas_pair(Aa, Ba, al);
+                return ;
+            }
+            if(Ca != 0.0) {
+                solve_aas_pair(Aa, Ca, al);
+            }
+            return ;
+        }
+        if (Ba != 0.0 && bl != 0.0) {
+            printf("Ba is angle pair");
+            if( Aa != 0.0) {
+                solve_aas_pair(Ba, Aa, bl);
+                return ;
+            }
+            if(Ca != 0.0) {
+                solve_aas_pair(Ba, Ca, bl);
+            }
+            return ;
+        }
+        if (Ca != 0.0 && cl != 0.0) {
+            printf("Ca is angle pair");
+            if(Aa != 0.0) {
+                solve_aas_pair(Ca, Aa, cl);
+                return ;;
+            }
+            if(Ba != 0.0) {
+                solve_aas_pair(Ca, Ba, cl);
+            }
+            return ;
+        }
+        if (al != 0.0) {
+            solve_aas_nopair(Aa, Ba, Ca, al);
+        }
+        if (bl != 0.0) {
+            solve_aas_nopair(Aa, Ba, Ca, bl);
+        }
+        if (cl != 0.0) {
+            solve_aas_nopair(Aa, Ba, Ca, cl);
+        }
+        return ;
+    }
+}
 int main(int argc,char** argv) {
 
 //declare variables for the triangle
@@ -241,59 +293,12 @@ int main(int argc,char** argv) {
         }
         assert(angle != 0.0);
         solve_ssa(sides[0],sides[1],angle);
-        return 0;
+        //return 0;
+        work_on_aas(al, Aa, bl, Ba, cl, Ca, side_count, angles)
 
 
     }
-    if(sides>=1 && angles >=2) {
-        printf("solve a aas triangle");
-        //TODO: create function to solve aas triangle
-        // Find angle side pair if they exists
 
-        if (Aa != 0.0 && al != 0.0) {
-            printf("Aa is angle pair");
-            if(Ba != 0.0) {
-                solve_aas_pair(Aa, Ba, al);
-                return 0;
-            }
-            if(Ca != 0.0) {
-                solve_aas_pair(Aa, Ca, al);
-            }
-            return 0;
-        }
-        if (Ba != 0.0 && bl != 0.0) {
-            printf("Ba is angle pair");
-            if( Aa != 0.0) {
-                solve_aas_pair(Ba, Aa, bl);
-                return 0;
-            }
-            if(Ca != 0.0) {
-                solve_aas_pair(Ba, Ca, bl);
-            }
-            return 0;
-        }
-        if (Ca != 0.0 && cl != 0.0) {
-            printf("Ca is angle pair");
-            if(Aa != 0.0) {
-                solve_aas_pair(Ca, Aa, cl);
-                return 0;;
-            }
-            if(Ba != 0.0) {
-                solve_aas_pair(Ca, Ba, cl);
-            }
-            return 0;
-        }
-        if (al != 0.0) {
-            solve_aas_nopair(Aa, Ba, Ca, al);
-        }
-        if (bl != 0.0) {
-            solve_aas_nopair(Aa, Ba, Ca, bl);
-        }
-        if (cl != 0.0) {
-            solve_aas_nopair(Aa, Ba, Ca, cl);
-        }
-        return 0;
-    }
 
     return  0;
 }
