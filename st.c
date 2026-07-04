@@ -198,27 +198,27 @@ int main(int argc,char** argv) {
         sides++;
     }
     printf("enter angle of a in degrees: ");
-    myscanf("%lf",&Aa);
+    myscanf(&Aa);
     if(Aa != 0.0) {
         angles++;
     }
     printf("enter length of side b: ");
-    myscanf("%lf",&bl);
+    myscanf(&bl);
     if(bl != 0.0) {
         sides++;
     }
     printf("enter angle of b in degrees: ");
-    myscanf("%lf",&Ba);
+    myscanf(&Ba);
     if(Ba != 0.0) {
         angles++;
     }
     printf("enter length of side c: ");
-    myscanf("%lf",&cl);
+    myscanf(&cl);
     if(cl != 0.0) {
         sides++;
     }
     printf("enter angle of c in degrees: ");
-    myscanf("%lf",&Ca);
+    myscanf(&Ca);
     if(Ca != 0.0) {
         angles++;
     }
