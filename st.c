@@ -253,7 +253,6 @@ int main(int argc,char** argv) {
             printf("Aa is a side angle pair\n");
             if(bl != 0) {
                 solve_sas(al,Aa,bl);
-                printf("line: %i \n",__LINE__);
             }
             else {
                 solve_sas(al,Aa,cl);
