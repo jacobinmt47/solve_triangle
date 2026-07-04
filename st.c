@@ -1,8 +1,18 @@
 
 #define _USE_MATH_DEFINES
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include <assert.h>
+
+void myscanf(double * input){
+    int retval = 0;
+    retval = scanf("%lf",input);
+    if(retval != 1){
+        printf("bad input!!!");
+        exit(-1);
+    }
+}
 
 
 double to_radian(double degrees) {
@@ -183,32 +193,32 @@ int main(int argc,char** argv) {
 
     printf("enter values for the triangle use zero if you don't know the value\n");
     printf("enter length of side a: ");
-    scanf("%lf",&al);
+    myscanf(&al);
     if(al != 0.0) {
         sides++;
     }
     printf("enter angle of a in degrees: ");
-    scanf("%lf",&Aa);
+    myscanf("%lf",&Aa);
     if(Aa != 0.0) {
         angles++;
     }
     printf("enter length of side b: ");
-    scanf("%lf",&bl);
+    myscanf("%lf",&bl);
     if(bl != 0.0) {
         sides++;
     }
     printf("enter angle of b in degrees: ");
-    scanf("%lf",&Ba);
+    myscanf("%lf",&Ba);
     if(Ba != 0.0) {
         angles++;
     }
     printf("enter length of side c: ");
-    scanf("%lf",&cl);
+    myscanf("%lf",&cl);
     if(cl != 0.0) {
         sides++;
     }
     printf("enter angle of c in degrees: ");
-    scanf("%lf",&Ca);
+    myscanf("%lf",&Ca);
     if(Ca != 0.0) {
         angles++;
     }
