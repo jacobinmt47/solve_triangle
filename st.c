@@ -81,8 +81,17 @@ void solve_ssa(double al,double bl, double ca) {
 }
 
 void solve_sas(double al,double aa,double bl) {
+    // solves for a pair an angle and length
     double ba = law_of_sine_angle(al,aa,bl);
     double bda = to_degree(ba); // law of sine returns in radians
+    assert((aa+bda)<=180); // assert it's a valid triangle
+    double altba = 180-bda; //check for another triangle
+    if((altba+aa)<180.0){
+        //there is another triangle
+        double altca = 180 -(altba+aa);
+        double altcl = law_of_sine_side(al,aa,altca);
+        print_solved(al,bl,altcl,aa,altba,altca);
+    }
     double ca = 180 -(bda+aa); // ca in degrees
     double cl = law_of_sine_side(al,aa,ca);
     print_solved(al,bl,cl,aa,bda,ca);
@@ -270,7 +279,7 @@ int main(int argc,char** argv) {
             return 0;
         }
         if(cl>0 &&  Ca >0) {
-            printf("Ca us the side angle pair\n");
+            printf("Ca is the side angle pair\n");
             if(al != 0) {
                 solve_sas(cl,Ca,al);
             }
