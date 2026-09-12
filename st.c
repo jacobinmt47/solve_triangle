@@ -25,9 +25,9 @@ double to_degree(double radians) {
 
 void print_solved(double al, double bl, double cl, double Aa, double Ba, double Ca) {
     printf("the triangle is fully solved\n");
-    printf("angle a %lf side a: %lf\n", Aa,al);
-    printf("angle b %lf side b: %lf\n", Ba,bl);
-    printf("angle c %lf side c: %lf\n", Ca,cl);
+    printf("angle x %lf side x: %lf\n", Aa,al);
+    printf("angle y %lf side y: %lf\n", Ba,bl);
+    printf("angle z %lf side z: %lf\n", Ca,cl);
 }
 double law_of_sine_angle(double al,double aa,double bl) {
 // calculate the angle using the law of sine return in radians

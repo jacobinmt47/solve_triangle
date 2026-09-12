@@ -1,0 +1,81 @@
+st.c: (in function to_radian)
+st.c:9:22: Unrecognized identifier: M_PI
+  Identifier used in code has not been declared. (Use -unrecog to inhibit
+  warning)
+st.c: (in function solve_aas_nopair)
+st.c:82:8: Dangerous equality comparison involving double types: Aa == 0.0
+  Two real (float, double, or long double) values are compared directly using
+  == or != primitive. This may produce unexpected results since floating point
+  representations are inexact. Instead, compare the difference to FLT_EPSILON
+  or DBL_EPSILON. (Use -realcompare to inhibit warning)
+st.c:90:8: Dangerous equality comparison involving double types: Ba == 0.0
+st.c:98:8: Dangerous equality comparison involving double types: Ca == 0.0
+st.c: (in function work_on_aas)
+st.c:124:13: Dangerous equality comparison involving double types: Aa != 0.0
+st.c:124:26: Dangerous equality comparison involving double types: al != 0.0
+st.c:126:16: Dangerous equality comparison involving double types: Ba != 0.0
+st.c:130:16: Dangerous equality comparison involving double types: Ca != 0.0
+st.c:135:13: Dangerous equality comparison involving double types: Ba != 0.0
+st.c:135:26: Dangerous equality comparison involving double types: bl != 0.0
+st.c:137:17: Dangerous equality comparison involving double types: Aa != 0.0
+st.c:141:16: Dangerous equality comparison involving double types: Ca != 0.0
+st.c:146:13: Dangerous equality comparison involving double types: Ca != 0.0
+st.c:146:26: Dangerous equality comparison involving double types: cl != 0.0
+st.c:148:16: Dangerous equality comparison involving double types: Aa != 0.0
+st.c:152:16: Dangerous equality comparison involving double types: Ba != 0.0
+st.c:157:13: Dangerous equality comparison involving double types: al != 0.0
+st.c:160:13: Dangerous equality comparison involving double types: bl != 0.0
+st.c:163:13: Dangerous equality comparison involving double types: cl != 0.0
+st.c: (in function main)
+st.c:186:5: Return value (type int) ignored: scanf("%lf", &al)
+  Result returned by function call is not used. If this is intended, can cast
+  result to (void) to eliminate message. (Use -retvalint to inhibit warning)
+st.c:187:8: Dangerous equality comparison involving double types: al != 0.0
+st.c:191:5: Return value (type int) ignored: scanf("%lf", &Aa)
+st.c:192:8: Dangerous equality comparison involving double types: Aa != 0.0
+st.c:196:5: Return value (type int) ignored: scanf("%lf", &bl)
+st.c:197:8: Dangerous equality comparison involving double types: bl != 0.0
+st.c:201:5: Return value (type int) ignored: scanf("%lf", &Ba)
+st.c:202:8: Dangerous equality comparison involving double types: Ba != 0.0
+st.c:206:5: Return value (type int) ignored: scanf("%lf", &cl)
+st.c:207:8: Dangerous equality comparison involving double types: cl != 0.0
+st.c:211:5: Return value (type int) ignored: scanf("%lf", &Ca)
+st.c:212:8: Dangerous equality comparison involving double types: Ca != 0.0
+st.c:244:16: Dangerous equality comparison involving double types: bl != 0
+st.c:255:16: Dangerous equality comparison involving double types: al != 0
+st.c:265:16: Dangerous equality comparison involving double types: al != 0
+st.c:299:16: Dangerous equality comparison involving double types: angle != 0.0
+st.c:169:14: Parameter argc not used
+  A function parameter is not used in the body of the function. If the argument
+  is needed for type compatibility or future plans, use /*@unused@*/ in the
+  argument declaration. (Use -paramuse to inhibit warning)
+st.c:169:26: Parameter argv not used
+st.c:8:8: Function exported but not used outside st: to_radian
+  A declaration is exported, but not used outside this module. Declaration can
+  use static qualifier. (Use -exportlocal to inhibit warning)
+   st.c:10:1: Definition of to_radian
+st.c:12:8: Function exported but not used outside st: to_degree
+   st.c:14:1: Definition of to_degree
+st.c:16:6: Function exported but not used outside st: print_solved
+   st.c:21:1: Definition of print_solved
+st.c:22:8: Function exported but not used outside st: law_of_sine_angle
+   st.c:31:1: Definition of law_of_sine_angle
+st.c:32:8: Function exported but not used outside st: law_of_sine_side
+   st.c:39:1: Definition of law_of_sine_side
+st.c:41:8: Function exported but not used outside st: law_of_cosine_side
+   st.c:47:1: Definition of law_of_cosine_side
+st.c:49:8: Function exported but not used outside st: law_of_cosine_angle
+   st.c:56:1: Definition of law_of_cosine_angle
+st.c:58:6: Function exported but not used outside st: solve_sss
+   st.c:63:1: Definition of solve_sss
+st.c:65:6: Function exported but not used outside st: solve_ssa
+   st.c:71:1: Definition of solve_ssa
+st.c:73:6: Function exported but not used outside st: solve_sas
+   st.c:79:1: Definition of solve_sas
+st.c:81:6: Function exported but not used outside st: solve_aas_nopair
+   st.c:107:1: Definition of solve_aas_nopair
+st.c:109:6: Function exported but not used outside st: solve_aas_pair
+   st.c:116:1: Definition of solve_aas_pair
+st.c:118:6: Function exported but not used outside st: work_on_aas
+   st.c:168:1: Definition of work_on_aas
+
